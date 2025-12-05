@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # Backend Node.js
+  backend:
+    build: ./Peliculas-Back
+    container_name: peliculas-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - PORT=8080
+      - MONGODB_URI=mongodb+srv://jorgerivas_db_user:x3ZJokKf7RbIOHk6@jorgemario.3axpa2x.mongodb.net/peliculas?retryWrites=true&w=majority&appName=JorgeMario
+    volumes:
+      - ./Peliculas-Back:/app
+      - /app/node_modules
+
+  # Frontend React
+  frontend:
+    build: ./Peliculas-Front
+    container_name: peliculas-frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080/api
