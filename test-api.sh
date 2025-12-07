@@ -9,7 +9,7 @@ docker-compose ps
 
 echo ""
 echo "2. Probando conexión al backend..."
-echo "   URL: http://localhost:8080/api"
+echo "   URL: http://localhost:8080/api/productora"
 curl -s -o /tmp/response.txt -w "Código HTTP: %{http_code}\n" http://localhost:8080/api
 
 echo ""
